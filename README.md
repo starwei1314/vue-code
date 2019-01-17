@@ -1,1 +1,1 @@
-[vue1](#githubvue1)
+[vue1](/blob/master/vue1.html)

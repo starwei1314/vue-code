@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+
+</head>
+<body>
+    <div class="box">
+     <h2 v-text="str"></h2>
+     <button @click="moving" >点击按钮文字跑起来</button>
+     <button @click="end">跑到了,休息休息</button>
+     <button @click="setTime">{{msg}}</button>
+     <input type="text" v-model="msg1">
+     <button @click="add">点击 添加input的值到数组中</button>
+     <input type="text" v-model="msg2">
+     <input type="text" v-model="msg3">
+     <input type="text" v-model="msg4">
+     <ul>
+         <li v-for="(item,index) in list">{{item}}</li>
+         <li v-for="(item,index) of nick">{{item.id}}:{{item.name}}:{{item.description}}</li>
+     </ul>
+    </div>
+    <script>
+ let vm= new Vue({
+        el:".box",
+        data:{
+
+            nick:[{id:1,name:"信爷",description:"一点寒芒先至,随后枪出如龙"}],
+            list:[],
+            str :"我是小白,赶紧让路",
+            msg:"定时器跑起来",
+            timeId:"",
+            msg1:"我是双向绑定",
+            msg2:22,
+            msg3:33,
+            msg4:444
+        },
+        methods:{
+            moving(){
+                let start=this.str.substring(0,1)
+                let end=this.str.substring(1)
+                this.str=end+start
+            },
+            end(){
+                clearInterval(this.timeId)
+                this.timeId=null
+            },
+            setTime(){
+                //用于定时器内使用this 其指向会发生改变指向window,无法获取数据,,故而
+            this.timeId=setInterval(()=>{
+                let start=this.str.substring(0,1)
+                let end=this.str.substring(1)
+                this.str=end+start
+               },1000) 
+            },
+            add(){
+                var name=this.msg2;
+                var description=this.msg3;
+                var id=this.msg4;
+            this.list.push(this.msg1)
+            this.nick.push({name,description,id})
+        }
+        },
+        
+
+    })
+    </script>
+</body>
+</html>

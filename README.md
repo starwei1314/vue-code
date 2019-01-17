@@ -1,1 +1,1 @@
-[vue1](/blob/master/vue1.html)
+[vue1](/vue1.html)

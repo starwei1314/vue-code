@@ -1,1 +1,1 @@
-[vue1.html](#github vue1.html)
+[vue1](#githubvue1)

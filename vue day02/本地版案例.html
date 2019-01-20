@@ -1,0 +1,95 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <h3 class=" bg-primary">添加品牌</h3>
+                <div>
+                    <label>
+                    ID:<input type="text" v-model="id">
+                </label>
+                <label>
+                    carName:<input type="text" @keyup.enter="add" v-model="carName">
+                </label>
+                    <input type="button" value="添加" @click="add" class="btn">
+                    搜索品牌: <input type="text" v-model="keywords" v-focus v-color="'green'">
+                </div>
+            </div>
+            
+           
+            
+            <table class= "table table-striped  table-bordered table-hover"> 
+                <tr>
+                    <th>ID</th>
+                    <th>carName</th>
+                    <th>ctime</th>
+                    <th>Doing</th>
+                </tr>
+                <!-- 循环函数执行的返回的数组方法 -->
+                <tr v-for="item in search(keywords)">
+                    <td>{{item.id}}</td>
+                    <td>{{item.carName}}</td>
+                    <td>{{item.ctime|dateFormat()}}</td>
+                    <td><a href="" @click.prevent="del">删除</a></td>
+                </tr>
+            </table>
+
+        </div>
+        <script src="lib/moment.js"></script>
+        <script>
+            Vue.filter("dateFormat",function(data,parent=""){
+                return moment().format(parent)
+            })
+            //自定义一个获取焦点 的事件,让页面一刷新  搜索栏自动获取焦点
+            Vue.directive("focus",{
+                inserted(el){
+                    //表示元素插入到DOM中的时候,会执行一次该函数,触发el.focus()事件
+                    el.focus()
+                }
+            })
+        new Vue({
+            el:"#app",
+            data:{
+                id:"",
+                keywords:"",
+                carName:"",
+        list:[
+            {id:1,carName:"奔驰",ctime:new Date()},
+            {id:2,carName:"宝马",ctime:new Date()},
+            {id:3,carName:"奥迪",ctime:new Date()},
+        ]
+            },
+            methods:{
+                add(){
+                    var car={id:this.id,carName:this.carName,ctime:new Date()}
+                    this.list.push(car)
+                },
+                del(id){
+                 return   this.list.splice(this.list.findIndex(item=>item.id==id),1)
+                },
+                search(keywords){
+                    //返回这个数组新方法的数组
+                   return  this.list.filter(item=>item.carName.includes(keywords))
+                }
+            },
+            //自定义属性修改字体颜色,局部式自定义属性
+            directives:{
+               color:{
+                    bind:function(el,binding){
+                    // console.log(binding)
+                        el.style.color=binding.value
+                    }
+                }
+            }
+        })
+        </script>
+    </body>
+    </html>

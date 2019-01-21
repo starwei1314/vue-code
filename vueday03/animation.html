@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+    <style>
+        /* 
+        1.v-enter:定义进入过渡生效时的开始状态,在元素被插入之前生效,在元素被插入之后的下一帧移除,
+        2.v-enter-active:定义进入过渡生效时的状态,在整个进入过渡的阶段中应用,在元素被插入之前生效,在过渡动画完成移除之后移除,这个类可以用来定义进入过渡的过程事件,延迟和曲线函数
+        3.v-enter-to:定义进入过渡的结束状态,在元素被插入之后的下一帧生效,同时v-enter被移除,在过渡动画完成之后移除
+        4.v-leave:定义离开过渡的开始状态,在离开过渡被触发时立刻生效,下一帧被移除,
+        5.v-leave-active:定义离开过渡生效时的状态,在在整个离开过渡的阶段中应用,在离开过渡被触发时立刻生效,在过渡/动画完成之后移除,这个类可以被用来定义离开过渡的过程时间,延迟和曲线函数
+        6.v-leave-to:定义离开过渡的结束状态,在离开过渡被触发之后下一帧生效,同时v-leave被删除,在过渡/动画完成之后移除
+         */
+ 
+ .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+   opacity: 0;
+   transform: translateY(200px)
+ }
+ .fade-enter-active, .fade-leave-active {
+   transition:all .5s;
+ }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <button v-on:click="show = !show">
+          Toggle
+        </button>
+        <transition name="fade">
+          <p v-if="show">hello</p>
+        </transition>
+      </div>
+      <script>
+        new Vue({
+        el: '#demo',
+        data: {
+          show: true
+        }
+      })
+    //   
+  
+      </script>
+    
+</body>
+</html>

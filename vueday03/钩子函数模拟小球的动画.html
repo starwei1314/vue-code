@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <style>
+            #ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="flag=!flag">切换</button>
+            <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter">
+            <div id="ball" v-show="flag"></div>
+          </transition>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:false
+                },
+                methods:{
+                    //钩子函数  当插入元素之前时
+                    beforeEnter(el){
+                        // beforeEnter 表示动画入场之前，此时，动画尚未开始，可以 在 beforeEnter 中，设置元素开始动画之前的起始样式
+                       // 每次点击重新设置小球开始动画之前的，起始位置
+                        el.style.transform="translate(0,0)"
+                    },
+                    enter(el,done){
+                        el.offsetWidth
+                        // enter 表示动画 开始之后的样式，这里，可以设置小球完成动画之后的，结束状态
+                        el.style.transform="translate(200px,200px)"
+                        el.style.transition="all 8s ease"
+                        done()//相当于调用afterEnter函数
+                    },
+                    afterEnter(el){
+                        this.flag=!this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

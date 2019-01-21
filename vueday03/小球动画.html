@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <style>
+            .ball{
+                width: 20px;
+                height: 20px;
+                border: 1px solid yellow;
+                background-color: skyblue;
+                border-radius: 50%;
+            }
+            .v-enter, .v-leave-to{
+                /* 当元素插入之前,和动画结束时 */
+                transform: translate(200px,200px)
+            }
+            .v-enter-active,.v-leave-active{
+                transition: all 0.8s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="flag=!flag" >动画切换</button>
+            <transition>
+            <div class="ball" v-show="flag"></div>
+            </transition>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:false
+                }
+            })
+        </script>
+    </body>
+</html>

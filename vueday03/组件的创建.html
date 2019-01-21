@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <template id="tmpl1">
+            <div>
+                <h1>这是第三种周杰伦</h1>
+                <h4>好用</h4>
+            </div>
+        </template>
+        <!-- <template id="tmpl2">
+                <div>
+                    <h1>这是第三种周杰伦2</h1>
+                    <h4>好用2</h4>
+                </div>
+            </template> -->
+        <div id="app">
+            <my-com></my-com>
+            <!-- <login>局部定义的</login> -->
+        </div>
+        <script>
+            //第一种方式
+            // //设置组件
+            // var com=Vue.extend({
+            //     template:"<h2>这是什么</h2>"
+            // })
+            // //注册组件
+            // Vue.component("myCom",com)
+
+            //第二种方法Vue.component(组件名称,vue.extend创建的组件模板)
+           
+           
+            //    第三种方法
+            Vue.component("myCom",{
+                template:"#tmpl1"
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                //局部定义
+                // components:{
+                //     "login":{
+                //         template:"#tmpl1"
+                //     }
+                // }
+            })
+        </script>
+    </body>
+</html>

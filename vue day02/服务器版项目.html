@@ -55,6 +55,10 @@
         Vue.filter("dateFormat",function(date,parent){
             return moment().format(parent)
         })
+        //设置全局根路径
+        Vue.http.options.root="http://vue.lovegf.cn:8899/api/"
+        //设置全局的格式
+        Vue.http.options.emulateJSON=true
        
     new Vue({
         el:"#app",
@@ -68,7 +72,7 @@
             add(){
                 // this.list.push({id:this.id,carName:this.carName,ctime:new Date()})
                 //发送请求  添加数据到服务器
-                this.$http.post("http://vue.lovegf.cn:8899/api/addproduct",{name:this.name},{ emulateJSON: true}).then(result=>{
+                this.$http.post("addproduct",{name:this.name}).then(result=>{
                     if(result.body.status==0){
                         this.getList()
                     }else{
@@ -82,7 +86,7 @@
                 //返回删除这个元素后的数组
                 // return this.list.splice(this.list.findIndex(item=>item.id==id),1)
                 //发送请求,删除数据库上的信息
-                this.$http.get(`http://vue.lovegf.cn:8899/api/delproduct/${id}`).then(result=>{
+                this.$http.get(`delproduct/${id}`).then(result=>{
                     console.log(result.body)
                     if(result.body.status==0) {
                         //删除成功后再次获取数据库的信息
@@ -100,7 +104,7 @@
             },
             //页面进来以后请求数据并渲染
             getList(){
-                this.$http.get("http://vue.lovegf.cn:8899/api/getprodlist").then(result=>{
+                this.$http.get("getprodlist").then(result=>{
                     console.log(result.body)
                     if(result.body.status==0){
                          this.list=result.body.message

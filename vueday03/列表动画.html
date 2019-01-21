@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <style>
+        li{
+            border:1px dotted grey;
+            margin:5px;
+            padding-left:10px;
+            list-style: none
+        }
+        li:hover{
+            background-color: skyblue;
+        }
+        .v-enter,.v-leave-to{
+            opacity: 0;
+            transform:translateY(50px)
+        }
+        .v-enter-active,.v-leave-active{
+            transition:all 2s ease
+        }
+        /* 下面的 .v-move 和 .v-leave-active 配合使用，能够实现列表后续的元素，渐渐地漂上来的效果 */ 
+        .v-move{
+            transition: all 2s ease
+        }
+        
+        .v-leave-active{
+            position: absolute
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <label>
+              ID:  <input type="text" v-model="id">
+            </label>
+            <label>
+              Name:  <input type="text" v-model="name"  @keydown.enter="add">
+            </label>
+            <transition-group tag="ul" appear>
+                <li v-for="item in list" :key="item.id">id:{{item.id}}---------{{item.name}}
+                       --------------------- <a href="" @click.prevent="del(item.id)">删除</a>
+                </li>
+            </transition-group>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    id:"",
+                    name:"",
+                    list:[
+                        {id:1,name:"浠水周杰伦"},
+                        {id:2,name:"通山梁朝伟"},
+                        {id:3,name:"广水黄博"}
+                    ]
+                },
+                methods:{
+                    add(){
+                        this.list.push({id:this.id,name:this.name}) 
+                    },
+                    del(id){
+                        //splice(index,i从index位置开始删除几个,返回包含删除项的数组)但是此方法会修改原数组
+                         return this.list.splice(this.list.findIndex(item=>item.id==id),1)
+                    }
+                   
+                }
+            })
+        </script>
+    </body>
+</html>

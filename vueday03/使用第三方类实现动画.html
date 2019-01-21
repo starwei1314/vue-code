@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <link rel="stylesheet" href="./lib/animate.css">
+    </head>
+    <body>
+        <div id="app">
+             <!-- 使用 :duration="毫秒值" 来统一设置 入场 和 离场 时候的动画时长 -->
+             <button @click="flag=!flag">第三方类</button>
+             <!-- enter-active-class元素插入时的动画类 -->
+             <!-- leave-active-class元素离开时的动画类 -->
+            <transition 
+            enter-active-class="fadeInDown"
+            leave-active-class="fadeOutUp"
+            :duration={enter:200,leave:400} >
+            <h3 v-show="flag" class="animated">改革春风吹满地,中国人民真争气</h3>
+            </transition>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:false
+                }
+            })
+        </script>
+    </body>
+</html>

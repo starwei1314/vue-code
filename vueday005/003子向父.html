@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 通过自定义方法将子组件的值传给父组件 -->
+            <h2>{{msg.title}}--{{msg.hi}}</h2>
+            <tmp @fun="show"></tmp>
+        </div>
+        <template id="tmp">
+            <div>
+                <input type="button" value="点击按钮  子向父传值" @click="myclick">
+            </div>
+        </template>
+        <script>
+            let tmp={
+                template:"#tmp",
+                data(){
+                    return {
+                      son:{title:"三生三世,十里桃花",hi:"此生不悔"}
+                    }
+                },
+                methods:{
+                    myclick(){
+                        this.$emit("fun",this.son)
+                    }
+                }
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                        msg:""
+                },
+                methods:{
+                    show(data){
+                        this.msg=data
+                    }
+                },
+                components:{
+                    tmp,
+                }
+            })
+        </script>
+    </body>
+</html>

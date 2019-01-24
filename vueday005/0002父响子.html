@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <tmp :parent="msg"></tmp>
+        </div>
+         <template id="tmp">
+             <div>
+                 <!-- 父组件中的msg通过:parent:msg传递给子组件 -->
+                 <h1>{{parent}}</h1>
+             </div>
+         </template>
+        <script>
+            //定义一个字面量的组件模板
+            let tmp={
+                template:"#tmp",
+                data(){
+                    return {}
+                },
+                props:["parent"]
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"我要离开了,不要难过"
+                },
+                components:{
+                    tmp,
+                }
+            })
+        </script>
+    </body>
+</html>

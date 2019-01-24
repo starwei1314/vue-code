@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <script src="./lib/vue-router.js"> </script>
+        <style>
+            .router-link-active{
+                color: rgb(124, 10, 10);
+                font-weight: 800;
+                font-style: italic;
+                font-size: 30px;
+                text-decoration: underline;
+                background-color: rgb(38, 147, 197);
+            }
+            .v-enter,.v-leave-to{
+                opacity: 0;
+                transform: translateX(200px)
+            }
+            .v-enter-active,.v-leave-active{
+                transition:all 1s ease
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/login" tag="span">登录</router-link>
+            <router-link to="/register" tag="span">注册</router-link>
+            <transition mode="out-in">
+                <router-view>
+            <!-- <template id="log">
+                        <div>
+                                <h1>登录组件</h1>
+                        </div>
+            </template>-->
+        </router-view> 
+            </transition>
+            
+        </div>
+        <script>
+            var login={
+                // template:"#log"
+                template:`<h1>登录组件</h1>`
+            }
+            var register={
+                template:`<h1>注册组件</h1>`
+            }
+            var routerObj=new VueRouter({
+                routes:[
+                    {path:"/",redirect:"/login"},
+                    {path:"/login",component:login},
+                    {path:"/register",component:register}
+                ],
+                //linkActiveClass可以重新设置高亮的显示类
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                //关联路由
+                router:routerObj
+
+            })
+        </script>
+    </body>
+</html>

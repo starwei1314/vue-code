@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+    </head>
+    <body>
+        <div id="app">
+            <tmp @fun="show"></tmp>
+            <ul class="list-group">
+                <li v-for="item in list" class="list-group-item" :key="item.id"> 
+                    <span class="badge">评论人： {{ item.username }}</span>
+                    {{ item.content }}
+                </li>
+            </ul>
+        </div>
+        <template id="tmp">
+            <div>
+                <div class="form-group">
+                    <label >评论人:</label>
+                    <input type="text" v-model="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label >评论内容:</label>
+                    <input type="text" v-model="content" class="form-control">
+                </div>
+                <div class="form-group">
+                     <input type="button"  value="发送"  class="btn btn-primary" @click="myclick" >
+                </div>
+            </div>
+        </template>
+        <script>
+            //创建一个字面量对象的组件
+            let tmp={
+                template:"#tmp",
+                data(){
+                    return {
+                        username:"",
+                        content:""
+                    }
+                },
+                methods:{
+                    myclick(){
+                        //获取本地缓存并且转化为数组
+                        var list=JSON.parse(localStorage.getItem("cmts")||'[]')
+                        //将输入信息添加到数组中
+                        list.unshift({username:this.username,content:this.content})
+                        //设置本地缓存,先转换为字符串
+                            localStorage.setItem("cmts",JSON.stringify( list))           
+                            //清空输入框的值
+                            this.username=this.content=""
+                            //调用父组件的方法
+                            this.$emit("fun")
+                    }
+                }
+
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    list:[]
+                },
+                created(){
+                    this.show()
+                },
+                methods:{
+                    show(){
+                        //从本地获取缓存  转华为数组
+                      this.list=JSON.parse(localStorage.getItem("cmts")||"[]")
+                      
+                    }
+                },
+                components:{
+                    tmp
+                }
+            })
+        </script>
+    </body>
+</html>

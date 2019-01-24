@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 父组件向子组件 传递方法  使用的是时间绑定 -->
+            <h2>{{data1}}</h2>
+            <com @func="show"></com>
+        </div>
+        <!-- 创建一个组件 ,t通过调用父组件中的函数,将参数传送过来-->
+        <!-- 子组件通过点击事件$emit触发父组件自定义的事件 -->
+        <template id="box">
+            <div>
+                <h2>这是子组件</h2>
+                <input type="button" value="这是子组件中的值 点击它 触发事件" @click="mycom">
+            </div>
+        </template>
+        <script>
+            let comm={
+                template:"#box",
+                data(){
+                    return {sonmsg:{
+                        name:"哆啦A梦的",color:"white and blue"
+                    }}
+                },
+                methods:{
+                    mycom(){
+                        
+                        // $emit指的是触发调用指定的函数并传参
+                        this.$emit("func",this.sonmsg)
+                    }
+                }
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    data1:""
+                },
+                methods:{
+                    show(data){
+                        this.data1=data
+                    }
+                },
+                components:{
+                    "com":comm
+                }
+            })
+        </script>
+    </body>
+</html>

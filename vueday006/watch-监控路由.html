@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <script src="./lib/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/login" tag="span">登录</router-link>
+            <router-link to="/register" tag="span">注册</router-link>
+            <!-- 容器 -->
+            <router-view></router-view>
+        </div>
+        <script>
+            //创建子组件
+            let login={
+                template:'<h3>这是登录子组件,这个组件是最骚的人</h3>'
+            }
+            let register={
+                template:'<h3>这是注册子组件,这个组件是更骚的人</h3>'
+            }
+            //创建一个路由对象
+            let router=new VueRouter({
+                routes:[//路由规则数组
+                    {path:"/",redirect:"/login"},
+                    {path:"/login",component:login},
+                    {path:"/register",component:register}
+                ]
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                router,
+                watch:{
+                    //利用watch  监控路由地址的改变
+                    //console.log($route)
+                    '$route.path':function(newVal,oldVal){
+                        if(newVal=='/login'){
+                            alert("欢迎进入登录页面")
+                        }else if(newVal=='/register'){
+                            alert ('欢迎进入注册页面')
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

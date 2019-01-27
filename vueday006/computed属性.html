@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>{{full}}</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    first:"早知道伤心总是难免的",
+                    last:"又何必一往情深"
+                },
+                computed:{
+                    full:{
+                        get(){
+                            return this.full=this.first+this.last
+                        },
+                        set(val){
+                            var arr=val.split('')
+                            this.first=arr[0]+arr[1]
+                            this.last=arr[2]+arr[3]
+                        }
+                    }
+                },
+                methods:{
+                     change(){
+                      setTimeout(()=>{
+                        this.full="梦醒时分"
+                      },3000)  
+                                }
+                            },
+                mounted(){
+                         this.change()
+                            }
+
+            })
+        </script>
+    </body>
+</html>

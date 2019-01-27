@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <script src="./lib/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to='/login/11/ls'>登录</router-link>
+            <router-link to='/register'>注册</router-link>
+            <router-view></router-view>
+        </div>
+        <script>
+            //创建组件
+            let login={
+                template:'<h1>登录组件--{{$route.params.id}}---{{$route.params.name}}</h1>'
+            }
+            let register={
+                template:'<h1>注册组件</h1>'
+            }
+            //创建路由,将组件挂载到路由之中
+            let router=new VueRouter({
+                routes:[
+                    {path:'/',redirect:'/login'},
+                    {path:'/login/:id/:name',component:login},
+                    {path:'/register',component:register}
+                ]
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                router,
+            })
+        </script>
+    </body>
+</html>

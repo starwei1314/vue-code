@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click='addData'>点击添加对象的数据</button>
+            <h3>往对象里添加的方法</h3>
+            <ul>
+                <li v-for="(val,key,index) of obj">
+                    数据值:{{val}}---关键字:{{key}}---索引:{{index}}
+
+                </li>
+            </ul>
+            <button @click=addData1>点击添加数组的数据</button>
+            <h3>往数组里面添加数据的方法</h3>
+            <ul>
+                <li v-for="(item,index) of list">{{item}}</li>
+            </ul>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    obj:{
+                        title:"几次真的想让自己醉,让自己远离这恩怨是非",
+                        name:"李宗盛",
+                        age:"50",
+                    },
+                    list:['凡人歌','冷风吹','刀剑笑']
+                },
+                methods:{
+                    addData(){
+                        Vue.set(this.obj,"skin"+Math.random(),'yellow')
+                    },
+                    addData1(){
+                        this.$set(this.list,3,'往事随风')
+                        //三个参数的说明:
+                        //1.第一个参数是目标,玩哪个对象或者数组里面添加元素
+                        //2.第二个参数是索引或者是对象的key值
+                        //3.第三个参数是要被添加的元素值
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <h2>ref的使用  如果是一个组件,使用$refs获取到的是这个组件的实例</h2>
+                <item @send="get" ref="one"></item>
+                <item @send="get" ref="two"></item>
+                <div>要求上面2个子组件的总和为:{{total}}</div>
+
+        </div>
+        <script>
+            Vue.component("item",{
+                data(){
+                    return{
+                        num:0
+                    }
+                },
+                template:"<div @click='add'>{{num}}</div>",
+                methods:{
+                    add(){
+                        this.num++
+                        this.$emit("send")//激活父组件中的绑定的send的事件
+                    }
+                }
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    total:0
+                },
+                methods:{
+                    get(){
+                        this.total=this.$refs.one.num+this.$refs.two.num
+                }
+                }
+            })
+        </script>
+    </body>
+</html>

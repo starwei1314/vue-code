@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+        <script src="./lib/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/account">这是account的组件的登录跳转</router-link>
+            <router-view></router-view>
+        </div>
+        <template id="account">
+            <div>
+                <h1>这是account组件的实体部分</h1>
+                <router-link to="/account/login">登录</router-link>
+                <router-link to="/account/register">注册</router-link>    
+                <router-view></router-view>
+            </div>
+        </template>
+        <template id='login'>
+            <div>
+                <h1>这是子组件的登录</h1>
+            </div>
+        </template>
+        <template id="register">
+            <div>
+                <h1>这是子组件的注册</h1>
+            </div>
+        </template>
+        <script>
+            //创建父组件
+             let account={
+                 template:"#account"
+             }
+             //创建子组件
+             let login={
+                 template:"#login"
+             }
+             let register={
+                 template:"#register"
+             }
+             let router=new VueRouter({
+                 routes:[
+                    //  {path:'/',redirect:'/account'},
+                    //不做重定向可以将account的模板隐藏起来  页面更清洁
+                     {path:'/account',component:account,
+                     children:[
+                         {path:'login',component:login},
+                         {path:'register',component:register}
+                     ]
+                     },
+                     
+                 ]
+             })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                router
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{full}}
+            <div>{{msg}}</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    first:"以前打扰了",
+                    last:"以后不会了",
+                    msg:"往后余生不再见"
+                },
+                computed:{
+                    // 当first或者last数据有变化是就会重新计算full的值
+                    full(){
+                        return this.first+this.last
+                    }
+                },
+                methods:{
+                    change(){
+                        setTimeout(()=>{
+                            this.first="经典留声机"
+                            this.last="一首歌三人哼"
+                            this.msg="说不见就不见"
+                        },2000)
+                    }
+                },
+                mounted(){
+                    //编译好的模板全部渲染到页面上
+                    //调用change函数改变msg数据
+                    this.change()
+                }
+            })
+        </script>
+    </body>
+</html>

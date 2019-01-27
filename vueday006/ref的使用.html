@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./lib/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <h2>ref的使用  如果是一个dom元素,使用$refs获取到的是都没元素</h2>
+                <div @click='getCount' ref="hello">hello baby</div>
+            </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods:{
+                    //给元素添加上ref属性   利用VM实例上的$refs找到这个元素
+                    getCount(){
+                        alert(this.$refs.hello.innerHTML)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

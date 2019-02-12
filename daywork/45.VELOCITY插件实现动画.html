@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="./animate.css">
+    </head>
+    <body>
+        <div id="app">
+            <transition 
+            @before-leave="beforeLeaveHandel"
+            @leave='LeaveHandel'
+            @after-leave='afterLeaveHandel'>
+                <div v-show="flag">hello Jay</div>
+            </transition>
+            <button @click='change'>切换动画</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods:{
+                    change(){
+                        this.flag=!this.flag
+                    },
+                    beforeLeaveHandel(el){
+                        el.style.opacity=0
+                    },
+                    LeaveHandel(el,done){
+                        setTimeout(()=>{
+                            Velocity(el,{
+                                opacity:1
+                            },{duration:1000,complete:done})
+                        },2000)
+                    },
+                    afterLeaveHandel(el){
+                        console.log("动画完成了")
+                        el.style.fontSize='18px'
+                        el.style.backgroundColor=''
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

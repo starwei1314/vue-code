@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="addData">点击增加对象数据</button>
+            <h3>往对象里添加方法</h3>
+            <ul>
+                <li v-for="( val,key,index) of obj">
+                    值:{{val}}---key:{{key}}-----索引:{{index}}
+                </li>
+            </ul>
+            
+            <button @click="addData2">点击增加数组数据</button>
+            <h3>往数组里添加方法</h3>
+            <ul>
+                <li v-for="( item,index) of list">
+                    值:{{item}}
+                </li>
+            </ul>
+
+    </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    obj:{
+                title:'china',
+                name:'mother',
+                age:70,
+                sex:'男'
+            },
+            list:[1,2,3,4,5]
+                },
+                methods:{
+                    addData(){
+                        //给对象添加方法
+                        Vue.set(this.obj,"skin"+Math.random())
+                    },
+                    addData2(){
+                        
+                        vm.$set(vm.list,5,"china")
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

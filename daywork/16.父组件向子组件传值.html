@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>父组件向子组件传值,如果不使用v-bind绑定则传递的就是字符串类型</h2>
+            <item1 conter="0"></item1>
+            <item1 conter="1"></item1>
+            <hr>
+            <h2>父组件向子组件传值,如果使用v-bind绑定,则传递的就是数字类型</h2>
+            <item2 :conter="0"></item2>
+            <item2 :conter="1"></item2>
+        </div>
+        <script>
+            //定义一个子组件
+            var item={
+         props:["conter"],
+         template:"<div>{{conter}}</div>",
+         created() {
+             console.log(typeof(this.conter))
+         },
+     }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                //挂载组件
+                components:{
+                    item1:item,
+                    item2:item
+                }
+            })
+        </script>
+    </body>
+</html>

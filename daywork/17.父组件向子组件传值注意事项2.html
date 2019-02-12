@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <h2>父组件向子组件传值如果使用v-bind绑定,则传送的值是数字类型</h2>
+                <item2 :conter="0"></item2>
+                <item2 :conter="1"></item2>
+        </div>
+        <script>
+            //定义一个子组件
+            let item={
+                //props自定义属性
+                props:["conter"],
+                template:"<div @click='addData'>{{conter}}</conter>",
+                created(){
+                    console.log(typeof(this.conter))
+                },
+                methods:{
+                    addData(){
+                        //警告
+                        // /Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "conter"
+   
+                    // 在  Vue 里面父组件向子组件传递数据是单向流,强烈建议不希望子组件去改父组件传递过来的数据,子组件只负责使用父组件传递过来的数据
+                     //解决方案:
+                         this.conter++           
+                    }
+                }
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

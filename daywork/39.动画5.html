@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="./animate.css">
+    </head>
+    <body>
+        <div id="app">
+            <h2>增加appear实现一进来就有动画的效果</h2>
+            <transition name='fade' appear 
+            enter-active-class="animated swing"
+            leave-active-class="animated shake"
+            appear-active-class="">
+            <div v-show='flag'>hi baby</div>
+            </transition>
+            <button @click="change">切换动画</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods:{
+                    change(){
+                        this.flag=!this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

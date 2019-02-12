@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+        <div>{{full}}</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    first:"hello",
+                    last:"baby"
+                },
+                //计算属性
+                computed:{
+                    full:{
+                        get(){
+                            console.log("get")
+                            return this.first+this.last
+                        },
+                        set(val){
+                            console.log(val)
+                            let arr=val.split('')
+                            //此时arr[0]为h  arr[1]为e
+                            this.first=arr[0]
+                            this.last=arr[1]
+                        }
+                    }
+                },
+                //通过设置vm.full重新赋值 来触发computed的set和get函数
+//如果仅使用计算属性则只是触发get函数返回full的计算属性
+//通过vm.full的重新赋值以后触发full对象里的所有函数   触发set函数
+            })
+            vm.full="helloworld"
+        </script>
+    </body>
+</html>

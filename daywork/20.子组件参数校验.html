@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <child :content="10"></child>
+        </div>
+        <script>
+            //自定义一个组件
+            Vue.component("child",{
+              //  props:{
+                //    content:String//父组件传递过来的是一个数字,子组件需要一个字符串
+                   // * 警告:
+                //  *valid prop: type check failed for prop "content". Expected String with value "10", got Number with value 10.
+                    // found in 
+                props:{
+                    content:[Number,String]//表示只能接受数字  字符串类型
+                },
+                template:"<div>{{content}}</div>"
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

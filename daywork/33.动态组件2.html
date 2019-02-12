@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <component :is="flag"></component>
+            <button @click="change">点击切换</button>
+        </div>
+        <script>
+            Vue.component("one",{
+                template:'<div>我是组件one</div>'
+            })
+            Vue.component("two",{
+                template:'<div>我是组件two</two>'
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:'one'
+                },
+                methods:{
+                change(){
+                    this.flag=this.flag==='one'?'two':'one'
+                }
+            }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <conents>
+                <header slot="header">我是头部的header</header>
+                <footer slot="footer">我是底部</footer>
+            </conents>
+        </div>
+        <script>
+            Vue.component("conents",{
+                template:`
+                <div>
+                 <slot name="header">
+                    <h2>我是默认值 如果不传z值就是用默认值</h2>
+                 </slot>
+                    <div>我是主体内容部分</div>
+                    <slot name="footer"></slot>
+                </div>`
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

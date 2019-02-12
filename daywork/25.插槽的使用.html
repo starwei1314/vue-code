@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <child>
+                 <h2>世界虽大</h2>
+            </child>
+            <child>
+                <h2>我想去看看</h2>
+            </child>
+        </div>
+        <script>
+
+            // <slot></slot>插槽将需要添加的添加的页面元素中
+            Vue.component("child",{
+                template:`<div><p>再见</p>
+                <slot><slot></div>`
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{full}}
+            <div>{{msg}}</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    first:"新年",
+                    last:"快乐",
+                    msg:"新年到了",
+                    full:""
+                },
+                // watch事件在这里就没有实际用处  
+                watch:{
+                    first(val){
+                        console.log('计算')
+                        this.full=val+this.last
+                    },
+                    last(val){
+                        console.log("计算了一次")
+                        this.full=this.first+val
+                    }
+                },
+                methods:{
+            change(){
+                setTimeout(()=>{
+                    //当watch检测到first 或者last有变化时会自动执行里面的函数
+                    this.first="我要改变"
+                },2000)
+                
+            }
+        },
+        mounted() {
+            this.change()
+        },
+            })
+        </script>
+    </body>
+</html>

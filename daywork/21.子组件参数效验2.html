@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <item content="hi China"></item>
+            <item :content="'你 好 帅'"></item>
+        </div>
+        <script>
+            //定义一个组件
+            Vue.component("item",{
+                props:{
+                    content:{
+                       type: [String,Number],
+                    required:true,//表示父组件必须要传递值,如果没有传递就会报警
+                    default:'在吗',//表示没有父组件没有传递值的时候的默认值
+                    validator(val){
+                        return val.length>5
+                    }
+                    }
+                },
+                template: '<div>{{content}}</div>'
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

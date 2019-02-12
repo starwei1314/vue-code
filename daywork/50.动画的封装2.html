@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <fade :flags=flag>
+                <div>hi baby</div>
+            </fade>
+            <fade :flags=flag>
+                    <div>hi long time no see</div>
+            </fade>
+            <button @click="change">点击触发效果</button>
+
+        </div>
+        <script>
+            Vue.component('fade',{
+                props:['flags'],
+                template:
+                    `<transition @before-enter="beforeEnter"
+                    @enter="enter"
+                    @after-enter="afterEnter">
+                        <slot v-if="flags"></slot>
+                    </transition>`,
+                    methods:{
+                        beforeEnter(el){
+                            el.style.color="skyblue"
+                        },
+                        Enter(el,done){
+                            setTimeout(()=>{
+                                el.style.fontSize='40px'
+                                el.style.backgroundColor="yellow"
+                            },1000)
+                            setTimeout(()=>{
+                                done()//结束该周期函数
+                            },2000)
+                        },
+                        afterEnter(el){
+                            el.style.fontSize="16px"
+                            el.style.backgroundColor="red"
+                        }
+                    }
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods:{
+                    change(){
+                        this.flag=!this.flag
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <component :is="flag"></component>
+                <button @click="change">点我动态切换组件</button>
+        </div>
+        <script>
+              Vue.component('one',{
+            template:'<div v-once>我是组件one</div>'
+        })
+
+        Vue.component("two",{
+            //只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+            template:"<div v-once>我是组件two</div>"
+        })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:'one'
+                },
+            methods:{
+              change(){
+                this.flag=this.flag==="one"?'two':'one'
+            }
+        }
+            })
+        </script>
+    </body>
+</html>

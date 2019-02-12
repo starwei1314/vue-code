@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <style>
+            /* 进入动画从0到1 */
+            .fade-enter{
+                opacity:0;
+            }
+            .fade-enter-active{
+                transition:all 3s ease-in-out
+            }
+            /* 离开动画从1到0 */
+            .fade-leave-to{
+                opacity:0;
+            }
+            .fade-leave-active{
+                transition: all 3s ease-in-out
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <transition name=fade>
+                <div v-show="flag">hi baby</div>
+            </transition>
+            <button @click="change">点击切换动画</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                  flag:true  
+                },
+                methods:{
+                    change(){
+                        this.flag=!this.flag
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>

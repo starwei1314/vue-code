@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="./animate.css">
+    </head>
+    <body>
+        <div id="app">
+            <h1>这是一个什么鬼</h1>
+            <transition 
+            @before-enter='beforeHandel'
+            @enter="enterHandel"
+            @after-enter='afterenterHandel'>
+            <div v-show='flag'>
+                hi hello
+            </div>
+            
+            </transition>
+                <button @click='change'>切换动画</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods:{
+                    change(){
+                      this.flag=!this.flag  
+                    },
+                    beforeHandel(el){
+                        //el表示被transition标签包裹的div元素
+                        el.style.color='skyblue'
+                    },
+                    enterHandel(el,done){
+                        setTimeout(()=>{
+                            el.style.fontSize="40px"
+                            el.style.backgorundColor='blue'
+                        },2000)
+                        setTimeout(()=>{
+                            done()
+                        },4000)
+                    },
+                    afterenterHandel(el){
+                        el.style.fontSize='22px'
+                        el.style.backgorundColor=''
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{fullname}}
+            <p @click="change">{{msg}}</p>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    firstname:"新",
+                    middlename:"年",
+                    lastname:"好",
+                    msg:"可以改变的值"
+                },
+                computed:{
+                    fullname(){
+                        console.log("计算一次")
+                        return this.firstname+this.middlename+this.lastname
+                    }
+                },
+                methods:{
+                    change(){
+                        setTimeout(()=>{
+                             this.msg="改变"
+                        },2000)
+                       
+                    }
+                },
+                mounted() {
+                    //元素创建完成后自动调用这个函数
+                    this.change()
+                },
+            })
+        </script>
+    </body>
+</html>

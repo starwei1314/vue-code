@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                template:'<h1>{{this.data}}</h1>',
+                data: {
+                    msg:"这是什么写法"
+                },
+                beforeCreate() {
+                    console.log("beforeCreate表示实例创建之前")
+                },
+                created(){
+                    console.log("只是创建了实例")
+                },
+                beforeMount(el) {
+                    console.log("beforeMount")
+                    console.log(this.$el)
+                },
+                mounted(el) {
+                    console.log(this.$el)
+                },
+                beforeDestory(){
+                    console.log("beforeDestory")
+                },
+                destroyed(){
+                    console.log("destoryed")
+                },
+                beforeUpdate() {
+                    console.log("beforeUpdate")
+                },
+                updated() {
+                    console.log("update")
+                },
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p @click="show">{{msg}}</p>
+            <com></com>
+            <com1></com1>
+            
+        </div>
+        <script>
+            //定义组件,第一个全局的组件
+           Vue.component(
+               "com",
+               {template:"<h2>定义组件</h2>"}
+           )
+            var com1={
+                template:"<div>这是一个盒子</div>"
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"vue数据"
+                },
+                methods:{
+                    show(){
+                        alert("弹出框")
+                    }
+                },
+                //注册单个的局部组件
+                components:{
+                    com1:com1
+                }
+            })
+        </script>
+    </body>
+</html>

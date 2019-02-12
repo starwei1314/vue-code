@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>非父子组件传值(bug/总线/发布订阅/观察者模式)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <child content="hi"></child>
+            <child content="China"></child>
+        </div>
+        <script>
+            //在Vue的原型上加上一个bus属性
+            Vue.prototype.bus=new Vue()
+            Vue.component('child',{
+                props:{
+                    content:String//只接受字符串类型的值
+                },
+                data(){
+                    return {
+                        msg:this.content
+                    }
+                },
+                template:"<div @click='handel' >{{msg}}</div>",
+                methods:{
+                    handel(){
+                        this.bus.$emit("change",this.msg)//使用实例对象上的BUs属性对外发送事件
+
+                    }
+                },
+                
+                mounted(){
+                    //注册点击事件
+                    this.bus.$on("change",(val)=>{
+                        //这里使用实例上的bus属性监听传过来的事件
+                        this.msg=val
+                    })
+                }
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

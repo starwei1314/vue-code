@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <conents>
+                <header>
+                    我是头部header
+                </header>
+                <footer>
+                    我是底部footer
+                </footer>
+            </conents>
+        </div>
+        <script>
+            //统一个组件模板中两个插槽会形成两次
+            Vue.component("conents",{
+                template:`
+                <div>
+                    <slot></slot>
+                    <div>我是主体内容部分</div>
+                     <slot></slot>
+                </div>`
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>ref的使用  如果是一个dom元素.使用$refs获取到的是该dom元素</h2>
+            <div @click="get" ref="hi">hi china</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods:{
+                    get(){
+                        alert(this.$refs.hi.innerHTML)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

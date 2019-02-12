@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>与28项没有区别</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 利用slot-scope的属性名替换模板内容 -->
+            <child>
+                <template slot-scope="propsData">
+                    <li>
+                        {{propsData.content}}--hi
+                    </li>
+                </template>
+            </child>
+        </div>
+        <script>
+         Vue.component("child",{
+            data(){
+                return {
+                    list:[1,2,3,4]
+                }
+            },
+            template:`
+            <div>
+                <ul>
+                    <slot 
+                    v-for="item in list"
+                    :content=item
+                    >
+                        
+                    </slot>
+                </ul>   
+            </div>
+            `
+        })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>

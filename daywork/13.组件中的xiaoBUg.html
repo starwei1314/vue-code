@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <table>
+                    <tbody>
+            
+                        <tr is="row"></tr>
+                        <tr is='row'></tr>
+            
+            
+                            <hr>
+                        <tr is='rows'></tr>
+                        <tr is='rows'></tr>
+                    </tbody>
+                </table>
+        </div>
+        <script>
+            Vue.component("row",{
+                data:{
+                    content:"这是一个组件实例的错误写法",
+                    // 报错  The "data" option shoudle be a function
+                },
+                template:"<tr><td>{{content}}</td></tr>"
+            })
+            Vue.component("rows",{
+                data(){
+                    return {
+                        content:"这是一个组件实例的正确写法"
+                    }
+                },
+                template:"<tr><td>{{content}}</td></tr>"
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                }
+            })
+        </script>
+    </body>
+</html>
